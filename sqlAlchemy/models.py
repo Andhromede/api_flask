@@ -1,6 +1,3 @@
-# from sqlalchemy import create_engine, Column, Integer, String
-# from sqlalchemy.ext.declarative import declarative_base
-# from config import engine, Base
 from app import db
 from app import app
 
@@ -10,10 +7,23 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
 
+class Role(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+
+class Article(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String, nullable=False)
+    text = db.Column(db.String, nullable=False)
+    author = db.Column(db.Integer, foreign_key=True)
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String, nullable=False)
+    text = db.Column(db.String, nullable=False)
+    author = db.Column(db.Integer, foreign_key=True)
+
 with app.app_context():
     db.create_all()
 
-# class Role(Base):
-#     __tablename__ = 'role'
-#     id = Column(Integer, primary_key=True)
-#     name = Column(String)
+
