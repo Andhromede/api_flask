@@ -19,9 +19,9 @@ class Article(db.Model):
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String, nullable=False)
     text = db.Column(db.String, nullable=False)
     author = db.Column(db.Integer, foreign_key=True)
+    article = db.Column(db.Integer, foreign_key=True)
 
 with app.app_context():
     db.create_all()
